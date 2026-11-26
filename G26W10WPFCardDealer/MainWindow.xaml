@@ -1,34 +1,58 @@
 ﻿<Window x:Class="G26W10WPFCardDealer.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:G26W10WPFCardDealer"
-        mc:Ignorable="d"
-        Title="카드 딜러" Height="450" Width="800">
-    <Border Padding="5" Background="#040">
-        <DockPanel>
-            <Button 
-                DockPanel.Dock="Bottom" 
+        Title="카드 딜러"
+        Height="450"
+        Width="800">
+
+    <Grid Background="#004400">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 카드 이미지 출력 영역 -->
+        <UniformGrid Grid.Row="0"
+                     Rows="1"
+                     Columns="5"
+                     Margin="20">
+
+            <Image x:Name="Card1"
+                   Stretch="Uniform"/>
+
+            <Image x:Name="Card2"
+                   Stretch="Uniform"/>
+
+            <Image x:Name="Card3"
+                   Stretch="Uniform"/>
+
+            <Image x:Name="Card4"
+                   Stretch="Uniform"/>
+
+            <Image x:Name="Card5"
+                   Stretch="Uniform"/>
+
+        </UniformGrid>
+
+        <!-- 포커 족보 출력 -->
+        <TextBlock Grid.Row="1"
+                   x:Name="ResultText"
+                   Text="카드를 분배해주세요."
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="White"
+                   HorizontalAlignment="Center"
+                   Margin="10"/>
+
+        <!-- 카드 분배 버튼 -->
+        <Button Grid.Row="2"
                 x:Name="BtnDeal"
                 Content="카드 분배"
-                Padding="8"
-                Margin="16" 
-                Command="{Binding DealCardsCommand}"/>
+                Height="40"
+                Margin="20"
+                Click="OnDeal"/>
 
-            <ItemsControl ItemsSource="{Binding CardResource}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Rows="1"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Image Stretch="None" Source="{Binding}"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </DockPanel>
-    </Border>
+    </Grid>
 </Window>
