@@ -15,36 +15,43 @@
         </Grid.RowDefinitions>
 
         <!-- 카드 이미지 출력 -->
-        <UniformGrid Grid.Row="0"
-                     Rows="1"
-                     Columns="5"
-                     Margin="20">
+        <ItemsControl Grid.Row="0"
+                      ItemsSource="{Binding CardResource}"
+                      Margin="20">
 
-            <Image x:Name="Card1" Stretch="Uniform"/>
-            <Image x:Name="Card2" Stretch="Uniform"/>
-            <Image x:Name="Card3" Stretch="Uniform"/>
-            <Image x:Name="Card4" Stretch="Uniform"/>
-            <Image x:Name="Card5" Stretch="Uniform"/>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1" Columns="5"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
 
-        </UniformGrid>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}"
+                           Stretch="Uniform"
+                           Margin="5"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+        </ItemsControl>
 
         <!-- 족보 판별 결과 -->
         <StackPanel Grid.Row="1" Margin="10">
 
-            <TextBlock x:Name="ResultText"
-                       Text="카드를 분배해주세요."
+            <TextBlock Text="{Binding ResultText}"
                        FontSize="24"
                        FontWeight="Bold"
                        Foreground="White"
                        HorizontalAlignment="Center"/>
 
-            <TextBlock x:Name="ExpectedText"
+            <TextBlock Text="{Binding ExpectedText}"
                        FontSize="18"
                        Foreground="White"
                        HorizontalAlignment="Center"
                        Margin="5"/>
 
-            <TextBlock x:Name="TestResultText"
+            <TextBlock Text="{Binding TestResultText}"
+                       Foreground="{Binding TestResultColor}"
                        FontSize="20"
                        FontWeight="Bold"
                        HorizontalAlignment="Center"
@@ -55,9 +62,9 @@
         <!-- 랜덤 카드 분배 -->
         <Button Grid.Row="2"
                 Content="랜덤 카드 분배"
+                Command="{Binding DealCardsCommand}"
                 Height="40"
-                Margin="20,5"
-                Click="OnDeal"/>
+                Margin="20,5"/>
 
         <!-- 족보 테스트 -->
         <StackPanel Grid.Row="3"
@@ -65,21 +72,23 @@
                     HorizontalAlignment="Center"
                     Margin="20">
 
-            <ComboBox x:Name="HandComboBox"
+            <ComboBox ItemsSource="{Binding HandNames}"
+                      SelectedIndex="{Binding SelectedIndex,
+                                              Mode=TwoWay}"
                       Width="220"
                       Height="40"
                       FontSize="16"/>
 
             <Button Content="족보 테스트"
+                    Command="{Binding TestHandCommand}"
                     Width="130"
                     Height="40"
-                    Margin="10,0"
-                    Click="OnTest"/>
+                    Margin="10,0"/>
 
             <Button Content="다음 족보"
+                    Command="{Binding NextTestCommand}"
                     Width="130"
-                    Height="40"
-                    Click="OnNextTest"/>
+                    Height="40"/>
 
         </StackPanel>
 

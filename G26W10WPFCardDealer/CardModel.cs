@@ -1,4 +1,4 @@
-﻿namespace G26W10WPFCardDealer;
+﻿/*namespace G26W10WPFCardDealer;
 
 public record Card(int Suit, int Value)
 {
@@ -36,4 +36,31 @@ public class CardModel
             _cards.Add(new Card(cardNumber));
         }
     }
+}*/
+using G26W07WFCardDealer;
+using PokerCard = G26W07WFCardDealer.Card;
+
+namespace G26W10WPFCardDealer;
+
+public class CardModel
+{
+    public static readonly int NUMBER_OF_CARDS = 5;
+
+    public List<PokerCard> DealCards()
+    {
+        Deck deck = new Deck();
+        return deck.Draw(NUMBER_OF_CARDS);
+    }
+
+    public List<PokerCard> GetTestHand(int index)
+    {
+        return CheckCardTest.GetHand(index);
+    }
+
+    public string Evaluate(List<PokerCard> hand)
+    {
+        return CheckCard.Evaluate(hand);
+    }
+
+    public int TestCount => CheckCardTest.Count;
 }
